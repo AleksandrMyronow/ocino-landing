@@ -1,0 +1,58 @@
+---
+import { activeCompany } from '../config/companies';
+---
+
+<section class="relative bg-gray-50 overflow-hidden">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-28">
+    <div class="max-w-3xl">
+      <div 
+        class="inline-block px-4 py-1.5 rounded-full text-sm font-semibold mb-6"
+        style={`background-color: ${activeCompany.colors.primary}15; color: ${activeCompany.colors.primary}`}
+      >
+        Сертифіковані оцінювачі · Tegova REV · WRV WAWO
+      </div>
+
+      <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight mb-6">
+        Незалежна експертна<br/>
+        <span style={`color: ${activeCompany.colors.primary}`}>оцінка майна</span>
+      </h1>
+
+      <p class="text-lg sm:text-xl text-gray-600 mb-8 max-w-2xl">
+        Оцінюємо нерухомість, землю, транспорт, бізнес та нематеріальні активи 
+        для будь-якої мети — від бухгалтерського обліку до судових проваджень.
+      </p>
+
+      <div class="flex flex-col sm:flex-row gap-4">
+        <a 
+          href="#contact"
+          class="inline-flex items-center justify-center px-8 py-4 rounded-lg text-white font-semibold text-lg transition-opacity hover:opacity-90"
+          style={`background-color: ${activeCompany.colors.primary}`}
+        >
+          Замовити оцінку
+        </a>
+        <a 
+          href={`tel:${activeCompany.phoneRaw}`}
+          class="inline-flex items-center justify-center px-8 py-4 rounded-lg font-semibold text-lg border-2 transition-colors hover:bg-gray-100"
+          style={`border-color: ${activeCompany.colors.primary}; color: ${activeCompany.colors.primary}`}
+        >
+          {activeCompany.phone}
+        </a>
+      </div>
+
+      <div class="flex flex-wrap gap-x-8 gap-y-3 mt-12 text-sm text-gray-600">
+        <div class="flex items-center gap-2">
+          <span style={`color: ${activeCompany.colors.primary}`}>✓</span>
+          Усі напрямки оцінки
+        </div>
+        <div class="flex items-center gap-2">
+          <span style={`color: ${activeCompany.colors.primary}`}>✓</span>
+          Звіт за стандартами ФДМУ
+        </div>
+        <div class="flex items-center gap-2">
+          <span style={`color: ${activeCompany.colors.primary}`}>✓</span>
+          Робота по всій Україні
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

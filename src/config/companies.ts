@@ -55,7 +55,7 @@ export const companies: Record<string, Company> = {
       email: 'info@apeks-ok.com',
       director: 'Братішко Ігор Григорович',
       workHours: 'пн-пт 9:00-18:00, вихідні — за домовленістю',
-      logo: '/logos/apex.svg',
+      logo: '/logos/apeks.svg',
       colors: {
         primary: '#8B1A1A',
         primaryDark: '#5C0F0F',
@@ -89,4 +89,4 @@ export const companies: Record<string, Company> = {
    * АКТИВНА КОМПАНІЯ — це "тумблер" сайту.
    * Поміняй на companies.apex або companies.k7 щоб згенерувати сайт для іншої компанії.
    */
-  export const activeCompany: Company = companies.gvctrend;
+  export const activeCompany: Company = companies.apex;

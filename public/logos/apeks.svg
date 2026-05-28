@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 60" width="200" height="60">
+  <rect x="0" y="10" width="40" height="40" rx="6" fill="#8B1A1A"/>
+  <text x="20" y="38" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-weight="700" font-size="16">A</text>
+  <text x="50" y="32" fill="#8B1A1A" font-family="Arial, sans-serif" font-weight="700" font-size="18">ОК АПЕКС</text>
+  <text x="50" y="48" fill="#666" font-family="Arial, sans-serif" font-size="10">Оцінка майна</text>
+</svg>
