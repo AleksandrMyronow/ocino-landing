@@ -1,6 +1,20 @@
 ---
 import { activeCompany } from '../config/companies';
-import { documentGroups, generalNote } from '../config/documents';
+import { documentGroups } from '../config/documents';
+import { purposes, additionalServices, typeIdToLabel } from '../config/purposes';
+
+/** Формуємо текст банера для requiresBaseDocuments */
+function getBannerText(requires: string[] | 'all' | undefined): string | null {
+  if (!requires) return null;
+  if (requires === 'all') {
+    return 'Спочатку підготуйте базовий пакет документів за типом майна, яке оцінюється — оберіть свій тип у розділі вище "За типом майна".';
+  }
+  const labels = requires.map((id) => typeIdToLabel[id] || id);
+  if (labels.length === 1) {
+    return `Спочатку підготуйте базовий пакет документів за типом майна: ${labels[0]} (див. розділ вище "За типом майна").`;
+  }
+  return `Спочатку підготуйте базовий пакет документів за відповідним типом майна: ${labels.join(', ')} (див. розділ вище "За типом майна").`;
+}
 ---
 
 <section id="documents" class="py-20 lg:py-28 bg-white">
@@ -11,51 +25,34 @@ import { documentGroups, generalNote } from '../config/documents';
         Документи для оцінки
       </h2>
       <p class="text-lg text-gray-600">
-        Оберіть тип майна, щоб дізнатися які документи потрібно підготувати.
+        Перелік документів формується з двох частин: за типом майна та за метою оцінки.
       </p>
     </div>
 
-    <div class="space-y-3">
-      {documentGroups.map((group) => (
-        <details class="group border border-gray-200 rounded-xl overflow-hidden bg-white">
-          <summary 
-            class="flex items-center justify-between cursor-pointer p-5 font-semibold text-gray-900 hover:bg-gray-50 transition-colors list-none"
-          >
-            <span>{group.title}</span>
-            <span 
-              class="flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center text-white transition-transform group-open:rotate-45"
-              style={`background-color: ${activeCompany.colors.primary}`}
+    {/* ============ СЕКЦІЯ 1: ЗА ТИПОМ МАЙНА ============ */}
+    <div class="mb-16">
+      <h3 class="text-2xl font-bold text-gray-900 mb-6">За типом майна</h3>
+
+      <div class="space-y-3">
+        {documentGroups.map((group) => (
+          <details class="group border border-gray-200 rounded-xl overflow-hidden bg-white">
+            <summary 
+              class="flex items-center justify-between cursor-pointer p-5 font-semibold text-gray-900 hover:bg-gray-50 transition-colors list-none"
             >
-              <span class="text-xl leading-none">+</span>
-            </span>
-          </summary>
+              <span>{group.title}</span>
+              <span 
+                class="flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center text-white transition-transform group-open:rotate-45"
+                style={`background-color: ${activeCompany.colors.primary}`}
+              >
+                <span class="text-xl leading-none">+</span>
+              </span>
+            </summary>
 
-          <div class="px-5 pb-5 pt-1 space-y-5">
+            <div class="px-5 pb-5 pt-1 space-y-5">
 
-            {/* Основний список (якщо є) */}
-            {group.required && group.required.length > 0 && (
-              <ul class="space-y-2">
-                {group.required.map((doc) => (
-                  <li class="flex items-start gap-2.5 text-gray-700">
-                    <span 
-                      class="mt-1.5 flex-shrink-0 w-1.5 h-1.5 rounded-full"
-                      style={`background-color: ${activeCompany.colors.primary}`}
-                    ></span>
-                    <span>{doc}</span>
-                  </li>
-                ))}
-              </ul>
-            )}
-
-            {/* Підблоки (для НМА і суден) */}
-            {group.subgroups && group.subgroups.map((subgroup) => (
-              <div>
-                <p class="text-sm font-semibold uppercase tracking-wide mb-3" 
-                   style={`color: ${activeCompany.colors.primary}`}>
-                  {subgroup.title}:
-                </p>
+              {group.required && group.required.length > 0 && (
                 <ul class="space-y-2">
-                  {subgroup.items.map((doc) => (
+                  {group.required.map((doc) => (
                     <li class="flex items-start gap-2.5 text-gray-700">
                       <span 
                         class="mt-1.5 flex-shrink-0 w-1.5 h-1.5 rounded-full"
@@ -65,38 +62,171 @@ import { documentGroups, generalNote } from '../config/documents';
                     </li>
                   ))}
                 </ul>
-              </div>
-            ))}
+              )}
 
-            {/* Умовні групи (для бізнесу) */}
-            {group.conditionalGroups && group.conditionalGroups.map((cg) => (
-              <div class="pt-4 border-t border-gray-100">
-                <p class="text-sm font-semibold uppercase tracking-wide text-gray-500 mb-3">
-                  {cg.condition}:
-                </p>
-                <ul class="space-y-2">
-                  {cg.items.map((doc) => (
-                    <li class="flex items-start gap-2.5 text-gray-700">
-                      <span 
-                        class="mt-1.5 flex-shrink-0 w-1.5 h-1.5 rounded-full bg-gray-400"
-                      ></span>
-                      <span>{doc}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
+              {group.subgroups && group.subgroups.map((subgroup) => (
+                <div>
+                  <p class="text-sm font-semibold uppercase tracking-wide mb-3" 
+                     style={`color: ${activeCompany.colors.primary}`}>
+                    {subgroup.title}:
+                  </p>
+                  <ul class="space-y-2">
+                    {subgroup.items.map((doc) => (
+                      <li class="flex items-start gap-2.5 text-gray-700">
+                        <span 
+                          class="mt-1.5 flex-shrink-0 w-1.5 h-1.5 rounded-full"
+                          style={`background-color: ${activeCompany.colors.primary}`}
+                        ></span>
+                        <span>{doc}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
 
-          </div>
-        </details>
-      ))}
+              {group.conditionalGroups && group.conditionalGroups.map((cg) => (
+                <div class="pt-4 border-t border-gray-100">
+                  <p class="text-sm font-semibold uppercase tracking-wide text-gray-500 mb-3">
+                    {cg.condition}:
+                  </p>
+                  <ul class="space-y-2">
+                    {cg.items.map((doc) => (
+                      <li class="flex items-start gap-2.5 text-gray-700">
+                        <span 
+                          class="mt-1.5 flex-shrink-0 w-1.5 h-1.5 rounded-full bg-gray-400"
+                        ></span>
+                        <span>{doc}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+
+            </div>
+          </details>
+        ))}
+      </div>
     </div>
 
-    <div 
-      class="mt-8 p-5 rounded-xl text-sm text-gray-700"
-      style={`background-color: ${activeCompany.colors.primary}0D`}
-    >
-      <strong>Зверніть увагу:</strong> {generalNote}
+    {/* ============ СЕКЦІЯ 2: ЗА МЕТОЮ ОЦІНКИ ============ */}
+    <div class="mb-16">
+      <h3 class="text-2xl font-bold text-gray-900 mb-6">За метою оцінки</h3>
+
+      <div class="space-y-3">
+        {purposes.map((purpose) => {
+          const bannerText = getBannerText(purpose.requiresBaseDocuments);
+          return (
+            <details class="group border border-gray-200 rounded-xl overflow-hidden bg-white">
+              <summary 
+                class="flex items-center justify-between cursor-pointer p-5 font-semibold text-gray-900 hover:bg-gray-50 transition-colors list-none"
+              >
+                <span>{purpose.title}</span>
+                <span 
+                  class="flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center text-white transition-transform group-open:rotate-45"
+                  style={`background-color: ${activeCompany.colors.primary}`}
+                >
+                  <span class="text-xl leading-none">+</span>
+                </span>
+              </summary>
+
+              <div class="px-5 pb-5 pt-1 space-y-5">
+
+                {purpose.description && (
+                  <p class="text-gray-700 leading-relaxed">{purpose.description}</p>
+                )}
+
+                {purpose.valueType && (
+                  <div class="flex items-center gap-2 text-sm">
+                    <span class="font-semibold text-gray-600">Вид вартості:</span>
+                    <span class="text-gray-800">{purpose.valueType}</span>
+                  </div>
+                )}
+
+                {bannerText && (
+                  <div 
+                    class="p-4 rounded-lg text-sm"
+                    style={`background-color: ${activeCompany.colors.primary}15; border-left: 3px solid ${activeCompany.colors.primary}`}
+                  >
+                    <strong>ⓘ</strong> {bannerText}
+                  </div>
+                )}
+
+                {purpose.additionalDocs && purpose.additionalDocs.length > 0 && (
+                  <div>
+                    <p class="text-sm font-semibold uppercase tracking-wide text-gray-500 mb-3">
+                      Додаткові документи для цієї цілі:
+                    </p>
+                    <ul class="space-y-2">
+                      {purpose.additionalDocs.map((doc) => (
+                        <li class="flex items-start gap-2.5 text-gray-700">
+                          <span 
+                            class="mt-1.5 flex-shrink-0 w-1.5 h-1.5 rounded-full"
+                            style={`background-color: ${activeCompany.colors.primary}`}
+                          ></span>
+                          <span>{doc}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+
+                {purpose.subgroups && purpose.subgroups.map((subgroup) => (
+                  <div>
+                    <p class="text-sm font-semibold uppercase tracking-wide mb-3" 
+                       style={`color: ${activeCompany.colors.primary}`}>
+                      {subgroup.title}:
+                    </p>
+                    <ul class="space-y-2">
+                      {subgroup.items.map((doc) => (
+                        <li class="flex items-start gap-2.5 text-gray-700">
+                          <span 
+                            class="mt-1.5 flex-shrink-0 w-1.5 h-1.5 rounded-full"
+                            style={`background-color: ${activeCompany.colors.primary}`}
+                          ></span>
+                          <span>{doc}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                ))}
+
+                {purpose.bankSpecificNote && (
+                  <p class="text-sm text-gray-500 italic">
+                    {purpose.bankSpecificNote}
+                  </p>
+                )}
+
+              </div>
+            </details>
+          );
+        })}
+      </div>
+    </div>
+
+    {/* ============ SEO-БЛОК "ТАКОЖ ПРОВОДИМО ОЦІНКУ ДЛЯ" ============ */}
+    <div class="mt-12 p-6 rounded-xl bg-gray-50 border border-gray-200">
+      <h3 class="text-xl font-semibold text-gray-900 mb-4">
+        Також проводимо оцінку для:
+      </h3>
+      <ul class="space-y-2">
+        {additionalServices.map((service) => (
+          <li class="flex items-start gap-2.5 text-gray-700">
+            <span 
+              class="mt-1.5 flex-shrink-0 w-1.5 h-1.5 rounded-full"
+              style={`background-color: ${activeCompany.colors.primary}`}
+            ></span>
+            <span>{service}</span>
+          </li>
+        ))}
+      </ul>
+      <p class="mt-4 text-sm text-gray-600">
+        Для детальної інформації по цих напрямках — зв'яжіться з нами 
+        за телефоном <a href={`tel:${activeCompany.phone}`} 
+        class="font-semibold hover:underline" 
+        style={`color: ${activeCompany.colors.primary}`}>
+          {activeCompany.phone}
+        </a>.
+      </p>
     </div>
 
   </div>
