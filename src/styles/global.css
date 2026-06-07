@@ -4,69 +4,135 @@
   --font-sans: "Manrope", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 }
 
+/* ==================== ROOT FONT-SIZE (FLUID TYPOGRAPHY) ==================== */
+
+/* 
+  Базовий шрифт html залежить від ширини екрана.
+  Усі rem-одиниці Tailwind автоматично масштабуються.
+  
+  Точки:
+  - мобільне (до 768px):  16px
+  - планшет (768-1280px): 17px
+  - десктоп (1280-1920px): 18px
+  - 4K (>1920px):         20px
+*/
+html {
+  font-size: 16px;
+}
+
+@media (min-width: 768px) {
+  html { font-size: 17px; }
+}
+
+@media (min-width: 1280px) {
+  html { font-size: 18px; }
+}
+
+@media (min-width: 1920px) {
+  html { font-size: 20px; }
+}
+
+/* ==================== ТИПОГРАФІКА ==================== */
+
 body {
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Підкреслення характеру Manrope через типографічні налаштування */
 h1, h2, h3 {
-  letter-spacing: -0.02em;     /* трохи тісніше — Manrope любить це */
-  font-weight: 700;            /* жирніше за дефолт Tailwind */
+  letter-spacing: -0.02em;
+  font-weight: 700;
 }
 
 h1 {
-  letter-spacing: -0.03em;     /* для дуже великих заголовків ще тісніше */
+  letter-spacing: -0.03em;
 }
 
-/* Цифри табличні (для Pricing виглядає краще) */
 .font-mono, [class*="grn"] {
   font-variant-numeric: tabular-nums;
 }
 
 /* ==================== АНІМАЦІЇ ==================== */
 
-/* Плавний скрол для anchor-посилань (#about, #services тощо) */
 html {
-    scroll-behavior: smooth;
-  }
-  
-  /* Початковий стан анімованих елементів — невидимі і трохи знизу */
+  scroll-behavior: smooth;
+}
+
+.animate-on-scroll {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), 
+              transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.animate-on-scroll.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.animate-on-scroll.delay-100 { transition-delay: 100ms; }
+.animate-on-scroll.delay-200 { transition-delay: 200ms; }
+.animate-on-scroll.delay-300 { transition-delay: 300ms; }
+.animate-on-scroll.delay-400 { transition-delay: 400ms; }
+
+.card-hover {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.card-hover:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px -8px rgba(0, 0, 0, 0.1);
+}
+
+/* ==================== HEADER АНІМАЦІЯ ==================== */
+
+/* Стан Header'а коли користувач прокрутив сторінку */
+.header-scrolled {
+  box-shadow: 0 4px 20px -8px rgba(0, 0, 0, 0.1);
+}
+
+/* Кольорова смуга під Header (з'являється при скролі) */
+.header-accent {
+  height: 3px;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.header-scrolled .header-accent {
+  transform: scaleX(1);
+}
+
+/* Активний пункт меню — підкреслення в бренд-кольорі */
+.nav-link {
+  position: relative;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background-color: currentColor;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s ease;
+}
+
+.nav-link:hover::after,
+.nav-link.is-active::after {
+  transform: scaleX(1);
+}
+
+/* ==================== ACCESSIBILITY ==================== */
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
   .animate-on-scroll {
-    opacity: 0;
-    transform: translateY(30px);
-    transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), 
-                transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
-  }
-  
-  /* Стан коли елемент потрапив у видиму область (через JS) */
-  .animate-on-scroll.is-visible {
     opacity: 1;
-    transform: translateY(0);
+    transform: none;
+    transition: none;
   }
-  
-  /* Затримка для каскадних анімацій (children) */
-  .animate-on-scroll.delay-100 { transition-delay: 100ms; }
-  .animate-on-scroll.delay-200 { transition-delay: 200ms; }
-  .animate-on-scroll.delay-300 { transition-delay: 300ms; }
-  .animate-on-scroll.delay-400 { transition-delay: 400ms; }
-  
-  /* Hover-ефект для карток (м'яке підняття + тінь) */
-  .card-hover {
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-  }
-  .card-hover:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 12px 24px -8px rgba(0, 0, 0, 0.1);
-  }
-  
-  /* Поважати налаштування користувача "зменшити рух" — accessibility */
-  @media (prefers-reduced-motion: reduce) {
-    html { scroll-behavior: auto; }
-    .animate-on-scroll {
-      opacity: 1;
-      transform: none;
-      transition: none;
-    }
-  }
+}
