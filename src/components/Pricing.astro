@@ -61,14 +61,11 @@ const iconMap: Record<string, any> = {
       </p>
     </div>
 
-    <div 
-      class="mb-12 p-6 lg:p-8 rounded-2xl border-l-4"
-      style={`background-color: ${activeCompany.colors.primary}0D; border-color: ${activeCompany.colors.primary}`}
-    >
+    <div class="mb-12 p-6 lg:p-8 rounded-2xl border-l-4" style={`background-color: ${activeCompany.colors.primary}0D; border-color: ${activeCompany.colors.primary}`}>
       <h3 class="text-xl font-bold text-gray-900 mb-4">
         {pricingIntro.title}
       </h3>
-      
+
       {pricingIntro.paragraphs.map((p) => (
         <p class="text-gray-700 leading-relaxed mb-4">{p}</p>
       ))}
@@ -76,10 +73,7 @@ const iconMap: Record<string, any> = {
       <div class="space-y-3 mb-4">
         {pricingIntro.examples.map((ex) => (
           <div class="flex items-start gap-3">
-            <span 
-              class="mt-1.5 flex-shrink-0 w-2 h-2 rounded-full"
-              style={`background-color: ${activeCompany.colors.primary}`}
-            ></span>
+            <span class="mt-1.5 flex-shrink-0 w-2 h-2 rounded-full" style={`background-color: ${activeCompany.colors.primary}`}></span>
             <div>
               <span class="font-semibold text-gray-900">{ex.label}</span>
               <span class="text-gray-700"> — {ex.description}</span>
@@ -96,15 +90,12 @@ const iconMap: Record<string, any> = {
       <ul class="space-y-1 mb-4">
         {pricingIntro.noteItems.map((item) => (
           <li class="flex items-start gap-2 text-gray-700">
-            <span 
-              class="mt-1.5 flex-shrink-0 w-1.5 h-1.5 rounded-full"
-              style={`background-color: ${activeCompany.colors.primary}`}
-            ></span>
+            <span class="mt-1.5 flex-shrink-0 w-1.5 h-1.5 rounded-full" style={`background-color: ${activeCompany.colors.primary}`}></span>
             <span>{item}</span>
           </li>
         ))}
       </ul>
-      
+
       <p class="text-gray-700 leading-relaxed italic">
         {pricingIntro.noteFinal}
       </p>
@@ -115,26 +106,16 @@ const iconMap: Record<string, any> = {
         const IconComponent = iconMap[item.icon];
         return (
           <div class="p-5 rounded-xl border border-gray-200 bg-white hover:shadow-md transition-shadow">
-            <div 
-              class="w-12 h-12 rounded-lg flex items-center justify-center mb-3"
-              style={`background-color: ${activeCompany.colors.primary}15`}
-            >
+            <div class="w-12 h-12 rounded-lg flex items-center justify-center mb-3" style={`background-color: ${activeCompany.colors.primary}15`}>
               {IconComponent && (
-                <IconComponent 
-                  size={24} 
-                  strokeWidth={1.75}
-                  color={activeCompany.colors.primary}
-                />
+                <IconComponent size={24} strokeWidth={1.75} color={activeCompany.colors.primary} />
               )}
             </div>
             <h3 class="font-semibold text-gray-900 mb-1">{item.title}</h3>
             {item.subtitle && (
               <p class="text-sm text-gray-500 mb-3">{item.subtitle}</p>
             )}
-            <p 
-              class="text-lg font-bold mt-2"
-              style={`color: ${activeCompany.colors.primary}`}
-            >
+            <p class="text-lg font-bold mt-2" style={`color: ${activeCompany.colors.primary}`}>
               {item.price}
             </p>
           </div>
@@ -148,16 +129,9 @@ const iconMap: Record<string, any> = {
         return (
           <div class="p-6 rounded-xl border border-gray-200 bg-white">
             <div class="flex items-start gap-4 mb-4">
-              <div 
-                class="flex-shrink-0 w-12 h-12 rounded-lg flex items-center justify-center"
-                style={`background-color: ${activeCompany.colors.primary}15`}
-              >
+              <div class="flex-shrink-0 w-12 h-12 rounded-lg flex items-center justify-center" style={`background-color: ${activeCompany.colors.primary}15`}>
                 {IconComponent && (
-                  <IconComponent 
-                    size={24} 
-                    strokeWidth={1.75}
-                    color={activeCompany.colors.primary}
-                  />
+                  <IconComponent size={24} strokeWidth={1.75} color={activeCompany.colors.primary} />
                 )}
               </div>
               <div class="flex-1">
@@ -172,10 +146,7 @@ const iconMap: Record<string, any> = {
               {item.tiers.map((tier) => (
                 <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 py-2 border-b border-gray-100 last:border-b-0">
                   <span class="text-gray-700 flex-1">{tier.label}</span>
-                  <span 
-                    class="font-bold text-base whitespace-nowrap"
-                    style={`color: ${activeCompany.colors.primary}`}
-                  >
+                  <span class="font-bold text-base whitespace-nowrap" style={`color: ${activeCompany.colors.primary}`}>
                     {tier.price}
                   </span>
                 </div>
@@ -186,10 +157,7 @@ const iconMap: Record<string, any> = {
       })}
     </div>
 
-    <div 
-      class="p-8 rounded-2xl text-center"
-      style={`background-color: ${activeCompany.colors.primary}`}
-    >
+    <div class="p-8 rounded-2xl text-center" style={`background-color: ${activeCompany.colors.primary}`}>
       <h3 class="text-2xl font-bold text-white mb-3">
         {pricingCTA.title}
       </h3>
@@ -199,4 +167,8 @@ const iconMap: Record<string, any> = {
       <p class="text-white/80 text-sm mb-6 max-w-2xl mx-auto italic">
         {pricingCTA.bonusNote}
       </p>
-      <a href={pricingCTA.buttonHref} class="inline-block px-8 py-3 bg-white rounded-lg font-semibold hover:bg-gray-100 transition-color
+      <a href={pricingCTA.buttonHref} class="inline-block px-8 py-3 bg-white rounded-lg font-semibold hover:bg-gray-100 transition-colors" style={`color: ${activeCompany.colors.primary}`}>{pricingCTA.buttonText} →</a>
+    </div>
+
+  </div>
+</section>

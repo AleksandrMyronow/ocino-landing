@@ -64,22 +64,19 @@ export interface ServiceOption {
     {
       id: 'viber',
       label: 'Viber',
-      icon: '💬',
-      /** Формат посилання: viber://chat?number=+380XXXXXXXXX */
+      icon: 'MessageCircle',
       hrefPrefix: 'viber://chat?number=',
     },
     {
       id: 'telegram',
       label: 'Telegram',
-      icon: '✈️',
-      /** Формат посилання: https://t.me/+380XXXXXXXXX */
+      icon: 'Send',
       hrefPrefix: 'https://t.me/',
     },
     {
       id: 'whatsapp',
       label: 'WhatsApp',
-      icon: '📱',
-      /** Формат посилання: https://wa.me/380XXXXXXXXX */
+      icon: 'MessageSquare',
       hrefPrefix: 'https://wa.me/',
     },
   ];
