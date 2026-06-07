@@ -1,66 +1,75 @@
 ---
 import { activeCompany } from '../config/companies';
 import { services } from '../config/services';
+import { Building2, Trees, Car, Cog, Briefcase, Lightbulb } from '@lucide/astro';
+
+/**
+ * Мапа імені іконки (з конфігу services.ts) → компонент Lucide.
+ * Якщо додаємо нову категорію — додаємо і сюди.
+ */
+const iconMap: Record<string, any> = {
+  Building2,
+  Trees,
+  Car,
+  Cog,
+  Briefcase,
+  Lightbulb,
+};
 ---
 
 <section id="services" class="py-20 lg:py-28 bg-white">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
 
-    <div class="text-center max-w-3xl mx-auto mb-16">
+    <div class="text-center mb-12">
       <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
-        Що ми оцінюємо
+        Наші послуги
       </h2>
-      <p class="text-lg text-gray-600">
-        Проводимо оцінку всіх видів майна та майнових прав — 
-        від окремого предмета до цілісного майнового комплексу.
+      <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+        Проводимо незалежну оцінку будь-якого майна та майнових прав.
       </p>
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-      {services.map((service) => (
-        <div class="group p-8 rounded-2xl border border-gray-200 hover:border-transparent hover:shadow-xl transition-all duration-300 bg-white">
-          
-          <div 
-            class="w-14 h-14 rounded-xl flex items-center justify-center text-3xl mb-5"
-            style={`background-color: ${activeCompany.colors.primary}12`}
-          >
-            {service.icon}
+      {services.map((service) => {
+        const IconComponent = iconMap[service.icon];
+        return (
+          <div class="p-6 rounded-2xl border border-gray-200 bg-white hover:shadow-lg transition-shadow">
+            
+            <div 
+              class="w-14 h-14 rounded-xl flex items-center justify-center mb-5"
+              style={`background-color: ${activeCompany.colors.primary}15`}
+            >
+              {IconComponent && (
+                <IconComponent 
+                  size={28} 
+                  strokeWidth={1.75}
+                  color={activeCompany.colors.primary}
+                />
+              )}
+            </div>
+
+            <h3 class="text-xl font-bold text-gray-900 mb-2">
+              {service.title}
+            </h3>
+            <p class="text-sm text-gray-600 mb-4">
+              {service.description}
+            </p>
+
+            <ul class="space-y-2">
+              {service.items.map((item) => (
+                <li class="flex items-start gap-2 text-sm text-gray-700">
+                  <span 
+                    class="mt-1.5 flex-shrink-0 w-1.5 h-1.5 rounded-full"
+                    style={`background-color: ${activeCompany.colors.primary}`}
+                  ></span>
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+
           </div>
-
-          <h3 class="text-xl font-bold text-gray-900 mb-2">
-            {service.title}
-          </h3>
-          <p class="text-gray-500 text-sm mb-5">
-            {service.description}
-          </p>
-
-          <ul class="space-y-2.5">
-            {service.items.map((item) => (
-              <li class="flex items-start gap-2.5 text-gray-700 text-sm">
-                <span 
-                  class="mt-1 flex-shrink-0"
-                  style={`color: ${activeCompany.colors.primary}`}
-                >✓</span>
-                <span>{item}</span>
-              </li>
-            ))}
-          </ul>
-
-        </div>
-      ))}
-    </div>
-
-    <div class="text-center mt-14">
-      <p class="text-gray-600 mb-5">
-        Не знайшли потрібний тип майна? Ми оцінюємо все.
-      </p>
-      <a 
-        href="#contact"
-        class="inline-flex items-center justify-center px-8 py-4 rounded-lg text-white font-semibold transition-opacity hover:opacity-90"
-        style={`background-color: ${activeCompany.colors.primary}`}
-      >
-        Отримати консультацію
-      </a>
+        );
+      })}
     </div>
 
   </div>

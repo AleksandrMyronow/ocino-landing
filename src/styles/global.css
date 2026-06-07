@@ -9,3 +9,18 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+/* Підкреслення характеру Manrope через типографічні налаштування */
+h1, h2, h3 {
+  letter-spacing: -0.02em;     /* трохи тісніше — Manrope любить це */
+  font-weight: 700;            /* жирніше за дефолт Tailwind */
+}
+
+h1 {
+  letter-spacing: -0.03em;     /* для дуже великих заголовків ще тісніше */
+}
+
+/* Цифри табличні (для Pricing виглядає краще) */
+.font-mono, [class*="grn"] {
+  font-variant-numeric: tabular-nums;
+}
