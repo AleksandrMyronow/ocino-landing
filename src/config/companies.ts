@@ -1,6 +1,7 @@
 export interface Company {
     id: 'gvctrend' | 'apex' | 'k7';
     name: string;
+    slogan: string;
     legalName: string;
     edrpou: string;
     address: string;
@@ -35,6 +36,7 @@ export const companies: Record<string, Company> = {
     gvctrend: {
       id: 'gvctrend',
       name: 'ТОВ ГВК ТРЕНД',
+      slogan: 'формуємо рішення',
       legalName: 'Товариство з обмеженою відповідальністю "ГВК ТРЕНД"',
       edrpou: '45949042',
       address: 'Україна, 01033, м. Київ, вул. Володимирська, 89, прим. 108',
@@ -69,6 +71,7 @@ export const companies: Record<string, Company> = {
     apex: {
       id: 'apex',
       name: 'ПП ОК АПЕКС',
+      slogan: 'висновки яким довіряють',
       legalName: 'Приватне Підприємство "Оціночна компанія "Апекс"',
       edrpou: '36183078',
       address: 'Україна, 79016, Львівська обл., м. Львів, вул. Озаркевича, 4',
@@ -103,6 +106,7 @@ export const companies: Record<string, Company> = {
     k7: {
       id: 'k7',
       name: 'ТОВ Консалтингова компанія К7',
+      slogan: 'Обґрунтовано. Незалежно. Точно.',
       legalName: 'Товариство з обмеженою відповідальністю "Консалтингова компанія К7"',
       edrpou: '45974000',
       address: 'Україна, 76018, Івано-Франківська обл., м. Івано-Франківськ, вул. Гординського С., 1',

@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 655.73 753.4" role="img" aria-label="APEKS — graphic mark">
+  <title>APEKS</title>
+  <defs>
+    <linearGradient id="apeksFace" gradientUnits="userSpaceOnUse" x1="306.22" y1="1" x2="1" y2="752.4">
+      <stop offset="0" stop-color="#841B29"/>
+      <stop offset="0.5" stop-color="#771821"/>
+      <stop offset="1" stop-color="#651317"/>
+    </linearGradient>
+  </defs>
+  <!-- Dark base: full peak (both faces) + right swoosh tail -->
+  <path fill="#651317" d="M1 752.4L306.22 1L368.91 142.16C401 214.43 443.2 299.01 473.82 363.94C480.95 379.06 488.72 394.28 496.91 409.39C470.77 415.82 441.86 424.17 411.68 434.96C336.62 321.76 306.22 265.16 306.22 265.16L88.83 637.53C66.25 655.19 54.28 665.83 54.28 665.83L1 752.4ZM511.5 435.49C575.41 546.52 654.73 644.74 654.73 644.74C654.73 644.74 517.43 574.62 434.37 467.22C462.69 454.44 488.66 443.96 511.5 435.49Z"/>
+  <!-- Swoosh sweep -->
+  <path fill="#651317" d="M1 752.4C1 752.4 146.4 626.98 313.99 529.31C481.59 431.64 613.66 403.89 613.66 403.89C613.66 403.89 448.29 414.99 296.23 500.45C144.18 585.92 54.28 665.83 54.28 665.83L1 752.4Z"/>
+  <!-- Left face with gradient (folded sheen) -->
+  <path fill="url(#apeksFace)" d="M1 752.4L306.22 1L306.22 265.16L88.83 637.53C66.25 655.19 54.28 665.83 54.28 665.83L1 752.4Z"/>
+</svg>

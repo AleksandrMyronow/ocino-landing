@@ -23,23 +23,17 @@ const yearsLabel = `${activeCompany.yearsOnMarket} ${activeCompany.yearsOnMarket
   <!-- Центральний контейнер -->
   <div class="relative max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
 
-    <!-- Бейдж зверху -->
-    <div 
-      class="inline-flex items-center gap-2 px-4 py-2 rounded-full mb-8"
-      style={`background-color: ${activeCompany.colors.primary}15; color: ${activeCompany.colors.primary}`}
-    >
-      <ShieldCheck size={18} strokeWidth={2} />
-      <span class="text-sm font-semibold">{heroContent.badge}</span>
+   <!-- Логотип + слоган -->
+    <div class="flex flex-col items-center mb-6">
+      <img 
+        src={activeCompany.logo} 
+        alt={activeCompany.name}
+        class="h-24 sm:h-32 lg:h-40 w-auto mb-4"
+      />
+      <p class="text-xl sm:text-2xl lg:text-3xl font-semibold" style={`color: ${activeCompany.colors.primary}`}>
+        {activeCompany.slogan}
+      </p>
     </div>
-
-    <!-- Великий заголовок -->
-    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 mb-6 leading-tight">
-      {heroContent.titlePart1}
-      <br/>
-      <span style={`color: ${activeCompany.colors.primary}`}>
-        {heroContent.titlePart2}
-      </span>
-    </h1>
 
     <!-- Підзаголовок -->
     <p class="text-lg sm:text-xl text-gray-600 max-w-3xl mx-auto mb-10 leading-relaxed">
@@ -65,21 +59,6 @@ const yearsLabel = `${activeCompany.yearsOnMarket} ${activeCompany.yearsOnMarket
       </a>
     </div>
 
-    <!-- Тонкий trust-рядок -->
-    <div class="flex flex-wrap items-center justify-center gap-x-3 gap-y-2 text-xs sm:text-sm text-gray-500">
-      <span>
-        <span class="font-semibold text-gray-700">{yearsLabel}</span> 
-        {heroContent.trustItems[0]}
-      </span>
-      <span class="text-gray-300">·</span>
-      <span>{heroContent.trustItems[1]}</span>
-      <span class="text-gray-300">·</span>
-      <span>{heroContent.trustItems[2]}</span>
-      <span class="text-gray-300">·</span>
-      <span>{heroContent.trustItems[3]}</span>
-      <span class="text-gray-300">·</span>
-      <span>{heroContent.trustItems[4]}</span>
-    </div>
 
   </div>
 
