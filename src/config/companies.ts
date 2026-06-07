@@ -8,11 +8,14 @@ export interface Company {
     phoneRaw: string;
     email: string;
     director: string;
-    workHours: string;
     logo: string;
     founded: string;
     about: string;
     certifications: string[];
+    workingHours: {
+      weekdays: string;     
+      weekends: string;     
+    };
     colors: {
       primary: string;
       primaryDark: string;
@@ -38,7 +41,6 @@ export const companies: Record<string, Company> = {
       phoneRaw: '+380503955995',
       email: 'info@gvctrend.com',
       director: 'Миронов Володимир Миколайович',
-      workHours: 'пн-пт 9:00-18:00, вихідні — за домовленістю',
       logo: '/logos/gvctrend.svg',
       founded: '2025',
       about: "Оціночна компанія «ГВК Тренд» надає професійні послуги з незалежної оцінки майна на території всієї України. Наша команда — це кваліфіковані оцінювачі, заслужені оцінювачі УТО та власники міжнародних сертифікатів Tegova і WAWO, що мають свідоцтва за всіма напрямками оцінки. Ми гарантуємо об'єктивність, точність та відповідність звітів вимогам законодавства.",
@@ -49,7 +51,11 @@ export const companies: Record<string, Company> = {
        'Експертна грошова оцінка земельних ділянок',
        'Участь у науково-практичних конференціях',
        'Публікації у науково-фахових виданнях',
-],
+      ],
+      workingHours: {
+        weekdays: 'Пн-Пт: 9:00 - 18:00',
+        weekends: 'Сб-Нд: за домовленістю',
+      },
       colors: {
         primary: '#0F4C81',
         primaryDark: '#093560',
@@ -68,7 +74,6 @@ export const companies: Record<string, Company> = {
       phoneRaw: '+380982731139',
       email: 'info@apeks-ok.com',
       director: 'Братішко Ігор Григорович',
-      workHours: 'пн-пт 9:00-18:00, вихідні — за домовленістю',
       logo: '/logos/apeks.svg',
       founded: '2025',
       about: "Оціночна компанія «Апекс» працює на ринку з 2008 року. За цей час ми накопичили багатий досвід оцінки майна найрізноманітніших типів — від окремих предметів до цілісних майнових комплексів. У складі компанії працюють заслужені оцінювачі Українського товариства оцінювачів (УТО), що володіють усіма необхідними кваліфікаціями та постійно підвищують професійний рівень.",
@@ -80,6 +85,10 @@ export const companies: Record<string, Company> = {
        'Участь у науково-практичних конференціях',
        'Публікації у науково-фахових виданнях',
       ],
+      workingHours: {
+        weekdays: 'Пн-Пт: 9:00 - 18:00',
+        weekends: 'Сб-Нд: за домовленістю',
+      },
       colors: {
         primary: '#8B1A1A',
         primaryDark: '#5C0F0F',
@@ -98,7 +107,6 @@ export const companies: Record<string, Company> = {
       phoneRaw: '+380504331054',
       email: 'konsaltk7@gmail.com',
       director: 'Балагурак Володимир Володимирович',
-      workHours: 'пн-пт 9:00-18:00, вихідні — за домовленістю',
       logo: '/logos/k7.svg',
       founded: '2025',
       about: "ТОВ «Консалтингова компанія К7» надає професійні послуги з незалежної оцінки майна на території всієї України. Наша команда — це кваліфіковані оцінювачі, заслужені оцінювачі УТО та власники міжнародних сертифікатів Tegova і WAWO, що мають свідоцтва за всіма напрямками оцінки. Ми гарантуємо об'єктивність, точність та відповідність звітів вимогам законодавства.",
@@ -109,6 +117,10 @@ export const companies: Record<string, Company> = {
        'Участь у науково-практичних конференціях',
        'Публікації у науково-фахових виданнях',
       ],
+      workingHours: {
+        weekdays: 'Пн-Пт: 9:00 - 18:00',
+        weekends: 'Сб-Нд: за домовленістю',
+      },
       colors: {
         primary: '#1B5E3F',
         primaryDark: '#0F3D27',

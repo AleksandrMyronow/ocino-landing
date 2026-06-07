@@ -1,0 +1,176 @@
+---
+import { activeCompany } from '../config/companies';
+import { serviceOptions, contactTexts, messengers } from '../config/contact';
+
+const phoneClean = activeCompany.phone.replace(/[\s()-]/g, '');
+const phoneDigits = phoneClean.replace('+', '');
+const mapQuery = encodeURIComponent(activeCompany.address);
+const mapEmbedUrl = `https://www.google.com/maps?q=${mapQuery}&output=embed`;
+const mailtoSubject = encodeURIComponent('Zayavka z saytu');
+const mailtoHref = `mailto:${activeCompany.email}?subject=${mailtoSubject}`;
+
+const messengerLinks = messengers.map((m) => {
+  const href = m.id === 'telegram'
+    ? `${m.hrefPrefix}${phoneClean}`
+    : `${m.hrefPrefix}${phoneDigits}`;
+  return { ...m, href };
+});
+---
+
+<section id="contact" class="py-20 lg:py-28 bg-gray-50">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+
+    <div class="text-center mb-12">
+      <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
+        {contactTexts.sectionTitle}
+      </h2>
+      <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+        {contactTexts.sectionSubtitle}
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+
+      <div class="space-y-6">
+
+        <div class="bg-white p-6 rounded-2xl border border-gray-200">
+          <h3 class="text-xl font-bold text-gray-900 mb-5">
+            {contactTexts.contactsBlockTitle}
+          </h3>
+
+          <div class="flex items-start gap-3 mb-4">
+            <div class="flex-shrink-0 w-10 h-10 rounded-lg flex items-center justify-center text-white text-lg" style={`background-color: ${activeCompany.colors.primary}`}>
+              📞
+            </div>
+            <div>
+              <p class="text-sm text-gray-500 mb-1">Телефон</p>
+              <a href={`tel:${phoneClean}`} class="text-lg font-semibold text-gray-900 hover:underline">
+                {activeCompany.phone}
+              </a>
+            </div>
+          </div>
+
+          <div class="flex items-start gap-3 mb-4">
+            <div class="flex-shrink-0 w-10 h-10 rounded-lg flex items-center justify-center text-white text-lg" style={`background-color: ${activeCompany.colors.primary}`}>
+              ✉️
+            </div>
+            <div>
+              <p class="text-sm text-gray-500 mb-1">Email</p>
+              <a href={`mailto:${activeCompany.email}`} class="text-base font-semibold text-gray-900 hover:underline break-all">
+                {activeCompany.email}
+              </a>
+            </div>
+          </div>
+
+          <div class="flex items-start gap-3">
+            <div class="flex-shrink-0 w-10 h-10 rounded-lg flex items-center justify-center text-white text-lg" style={`background-color: ${activeCompany.colors.primary}`}>
+              📍
+            </div>
+            <div>
+              <p class="text-sm text-gray-500 mb-1">{contactTexts.addressTitle}</p>
+              <p class="text-base text-gray-900">{activeCompany.address}</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white p-6 rounded-2xl border border-gray-200">
+          <h3 class="text-xl font-bold text-gray-900 mb-4">
+            {contactTexts.workingHoursTitle}
+          </h3>
+          <div class="space-y-2">
+            <p class="text-base text-gray-700">{activeCompany.workingHours.weekdays}</p>
+            <p class="text-base text-gray-600">{activeCompany.workingHours.weekends}</p>
+          </div>
+        </div>
+
+        <div class="bg-white p-6 rounded-2xl border border-gray-200">
+          <h3 class="text-xl font-bold text-gray-900 mb-4">
+            {contactTexts.messengersTitle}
+          </h3>
+          <div class="grid grid-cols-3 gap-3">
+            {messengerLinks.map((m) => (
+              <a href={m.href} target="_blank" rel="noopener noreferrer" class="flex flex-col items-center gap-2 p-3 rounded-xl border border-gray-200 hover:bg-gray-50 transition-colors">
+                <span class="text-2xl">{m.icon}</span>
+                <span class="text-sm font-medium text-gray-700">{m.label}</span>
+              </a>
+            ))}
+          </div>
+        </div>
+
+        <div class="bg-white p-2 rounded-2xl border border-gray-200 overflow-hidden">
+          <iframe src={mapEmbedUrl} width="100%" height="280" style="border:0; border-radius: 0.875rem;" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade" title={`Map: ${activeCompany.name}`}></iframe>
+        </div>
+
+      </div>
+
+      <div class="bg-white p-6 lg:p-8 rounded-2xl border border-gray-200">
+        <h3 class="text-2xl font-bold text-gray-900 mb-2">
+          {contactTexts.formTitle}
+        </h3>
+        <p class="text-gray-600 mb-6">
+          {contactTexts.formSubtitle}
+        </p>
+
+        <form action={mailtoHref} method="post" enctype="text/plain" class="space-y-4">
+          
+          <div>
+            <label for="name" class="block text-sm font-semibold text-gray-700 mb-1.5">
+              {contactTexts.fieldNameLabel} <span class="text-red-500">*</span>
+            </label>
+            <input type="text" id="name" name="name" required placeholder={contactTexts.fieldNamePlaceholder} class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:border-gray-900 transition" />
+          </div>
+
+          <div>
+            <label for="phone" class="block text-sm font-semibold text-gray-700 mb-1.5">
+              {contactTexts.fieldPhoneLabel} <span class="text-red-500">*</span>
+            </label>
+            <input type="tel" id="phone" name="phone" required placeholder={contactTexts.fieldPhonePlaceholder} class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:border-gray-900 transition" />
+          </div>
+
+          <div>
+            <label for="email" class="block text-sm font-semibold text-gray-700 mb-1.5">
+              {contactTexts.fieldEmailLabel}
+            </label>
+            <input type="email" id="email" name="email" placeholder={contactTexts.fieldEmailPlaceholder} class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:border-gray-900 transition" />
+          </div>
+
+          <div>
+            <label for="service" class="block text-sm font-semibold text-gray-700 mb-1.5">
+              {contactTexts.fieldServiceLabel}
+            </label>
+            <select id="service" name="service" class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:border-gray-900 transition bg-white">
+              <option value="">{contactTexts.fieldServicePlaceholder}</option>
+              {serviceOptions.map((opt) => (
+                <option value={opt.value}>{opt.label}</option>
+              ))}
+            </select>
+          </div>
+
+          <div>
+            <label for="message" class="block text-sm font-semibold text-gray-700 mb-1.5">
+              {contactTexts.fieldMessageLabel}
+            </label>
+            <textarea id="message" name="message" rows="4" placeholder={contactTexts.fieldMessagePlaceholder} class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:border-gray-900 transition resize-none"></textarea>
+          </div>
+
+          <div class="flex items-start gap-3">
+            <input type="checkbox" id="consent" name="consent" required class="mt-1 w-4 h-4 rounded border-gray-300" style={`accent-color: ${activeCompany.colors.primary}`} />
+            <label for="consent" class="text-sm text-gray-600 cursor-pointer">
+              {contactTexts.consentText}
+            </label>
+          </div>
+
+          <button type="submit" class="w-full px-6 py-3 text-white font-semibold rounded-lg hover:opacity-90 transition-opacity" style={`background-color: ${activeCompany.colors.primary}`}>
+            {contactTexts.submitButton}
+          </button>
+
+          <p class="text-xs text-gray-500 text-center">
+            Натискаючи кнопку, ви відкриєте поштовий клієнт з підготовленим листом
+          </p>
+        </form>
+      </div>
+
+    </div>
+
+  </div>
+</section>
