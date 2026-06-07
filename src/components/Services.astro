@@ -3,10 +3,6 @@ import { activeCompany } from '../config/companies';
 import { services } from '../config/services';
 import { Building2, Trees, Car, Cog, Briefcase, Lightbulb } from '@lucide/astro';
 
-/**
- * Мапа імені іконки (з конфігу services.ts) → компонент Lucide.
- * Якщо додаємо нову категорію — додаємо і сюди.
- */
 const iconMap: Record<string, any> = {
   Building2,
   Trees,
@@ -20,7 +16,7 @@ const iconMap: Record<string, any> = {
 <section id="services" class="py-20 lg:py-28 bg-white">
   <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
 
-    <div class="text-center mb-12">
+    <div class="text-center mb-12 animate-on-scroll">
       <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
         Наші послуги
       </h2>
@@ -29,12 +25,12 @@ const iconMap: Record<string, any> = {
       </p>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 animate-on-scroll delay-200">
       {services.map((service) => {
         const IconComponent = iconMap[service.icon];
         return (
           <div class="p-6 rounded-2xl border border-gray-200 bg-white hover:shadow-lg transition-shadow">
-            
+
             <div 
               class="w-14 h-14 rounded-xl flex items-center justify-center mb-5"
               style={`background-color: ${activeCompany.colors.primary}15`}

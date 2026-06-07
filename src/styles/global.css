@@ -24,3 +24,49 @@ h1 {
 .font-mono, [class*="grn"] {
   font-variant-numeric: tabular-nums;
 }
+
+/* ==================== АНІМАЦІЇ ==================== */
+
+/* Плавний скрол для anchor-посилань (#about, #services тощо) */
+html {
+    scroll-behavior: smooth;
+  }
+  
+  /* Початковий стан анімованих елементів — невидимі і трохи знизу */
+  .animate-on-scroll {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), 
+                transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  
+  /* Стан коли елемент потрапив у видиму область (через JS) */
+  .animate-on-scroll.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  /* Затримка для каскадних анімацій (children) */
+  .animate-on-scroll.delay-100 { transition-delay: 100ms; }
+  .animate-on-scroll.delay-200 { transition-delay: 200ms; }
+  .animate-on-scroll.delay-300 { transition-delay: 300ms; }
+  .animate-on-scroll.delay-400 { transition-delay: 400ms; }
+  
+  /* Hover-ефект для карток (м'яке підняття + тінь) */
+  .card-hover {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .card-hover:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 24px -8px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Поважати налаштування користувача "зменшити рух" — accessibility */
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .animate-on-scroll {
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
+  }

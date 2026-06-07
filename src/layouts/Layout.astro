@@ -28,5 +28,30 @@ const {
 	</head>
 	<body>
 		<slot />
+			<script>
+	// Intersection Observer для анімацій при скролі
+	document.addEventListener('DOMContentLoaded', () => {
+		const observer = new IntersectionObserver(
+		(entries) => {
+			entries.forEach((entry) => {
+			if (entry.isIntersecting) {
+				entry.target.classList.add('is-visible');
+				// Анімація відіграється один раз — після цього не спостерігаємо
+				observer.unobserve(entry.target);
+			}
+			});
+		},
+		{
+			threshold: 0.1,        // Спрацьовує коли 10% елемента видно
+			rootMargin: '0px 0px -50px 0px', // Невелика затримка щоб виглядало природніше
+		}
+		);
+
+		// Знаходимо всі елементи з класом animate-on-scroll і додаємо до спостереження
+		document.querySelectorAll('.animate-on-scroll').forEach((el) => {
+		observer.observe(el);
+		});
+	});
+</script>
 	</body>
 </html>
