@@ -8,6 +8,7 @@ import {
   MessageCircle,
   Send,
   MessageSquare,
+  ExternalLink,
 } from '@lucide/astro';
 
 const messengerIconMap: Record<string, any> = {
@@ -18,8 +19,12 @@ const messengerIconMap: Record<string, any> = {
 
 const phoneClean = activeCompany.phone.replace(/[\s()-]/g, '');
 const phoneDigits = phoneClean.replace('+', '');
-const mapQuery = encodeURIComponent(activeCompany.address);
-const mapEmbedUrl = `https://www.google.com/maps?q=${mapQuery}&output=embed`;
+
+// Карта Google Maps з адреси
+const mapQuery = encodeURIComponent(activeCompany.legalAddress);
+const mapEmbedUrl = `https://maps.google.com/maps?q=${mapQuery}&t=&z=17&ie=UTF8&iwloc=A&output=embed`;
+const mapDirectLink = `https://www.google.com/maps/search/?api=1&query=${mapQuery}`;
+
 const mailtoSubject = encodeURIComponent('Zayavka z saytu');
 const mailtoHref = `mailto:${activeCompany.email}?subject=${mailtoSubject}`;
 
@@ -116,9 +121,29 @@ const messengerLinks = messengers.map((m) => {
           </div>
         </div>
 
+        <!-- Карта з посиланням на Google Maps -->
         <div class="bg-white p-2 rounded-2xl border border-gray-200 overflow-hidden">
-          <iframe src={mapEmbedUrl} width="100%" height="280" style="border:0; border-radius: 0.875rem;" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade" title={`Map: ${activeCompany.name}`}></iframe>
+          <iframe 
+            src={mapEmbedUrl} 
+            width="100%" 
+            height="280" 
+            style="border:0; border-radius: 0.875rem;" 
+            allowfullscreen 
+            loading="lazy" 
+            referrerpolicy="no-referrer-when-downgrade" 
+            title={`Карта: ${activeCompany.name}`}
+          ></iframe>
         </div>
+        
+        <a 
+          href={mapDirectLink}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="flex items-center justify-center gap-2 px-4 py-3 bg-white rounded-xl border border-gray-200 text-sm font-semibold text-gray-700 hover:bg-gray-50 hover:border-gray-300 transition-colors"
+        >
+          <ExternalLink size={16} strokeWidth={1.75} />
+          <span>Відкрити в Google Maps</span>
+        </a>
 
       </div>
 

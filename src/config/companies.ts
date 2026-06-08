@@ -2,6 +2,12 @@ export interface Company {
     id: 'gvctrend' | 'apex' | 'k7';
     name: string;
     slogan: string;
+    legalAddress: string;
+    bank: string;
+    iban: string;
+    sodNumber: string;
+    sodIssued: string;
+    sodValidUntil: string;
     legalName: string;
     edrpou: string;
     address: string;
@@ -39,7 +45,12 @@ export const companies: Record<string, Company> = {
       slogan: 'формуємо рішення',
       legalName: 'Товариство з обмеженою відповідальністю "ГВК ТРЕНД"',
       edrpou: '45949042',
-      address: 'Україна, 01033, м. Київ, вул. Володимирська, 89, прим. 108',
+      legalAddress: '01033, м. Київ, вул. Володимирська, буд. 89, приміщення 108',
+      bank: 'АТ «УКРСИББАНК»',
+      iban: 'UA883510050000026000879273324',
+      sodNumber: '61/2026',
+      sodIssued: '13.04.2026',
+      sodValidUntil: '12.04.2029',
       phone: '+38 (050) 395-59-95',
       phoneRaw: '+380503955995',
       email: 'info@gvctrend.com',
@@ -74,7 +85,12 @@ export const companies: Record<string, Company> = {
       slogan: 'висновки яким довіряють',
       legalName: 'Приватне Підприємство "Оціночна компанія "Апекс"',
       edrpou: '36183078',
-      address: 'Україна, 79016, Львівська обл., м. Львів, вул. Озаркевича, 4',
+      legalAddress: 'Україна, 79016, Львівська обл., м. Львів, вул. Озаркевича, 4',
+      bank: 'АТ «ОЩАДБАНК»',
+      iban: 'UA553257960000026005300360780',
+      sodNumber: '23/2026',
+      sodIssued: '10.02.2026',
+      sodValidUntil: '09.02.2029',
       phone: '+38 (098) 273-11-39',
       phoneRaw: '+380982731139',
       email: 'info@apeks-ok.com',
@@ -109,7 +125,12 @@ export const companies: Record<string, Company> = {
       slogan: 'Обґрунтовано. Незалежно. Точно.',
       legalName: 'Товариство з обмеженою відповідальністю "Консалтингова компанія К7"',
       edrpou: '45974000',
-      address: 'Україна, 76018, Івано-Франківська обл., м. Івано-Франківськ, вул. Гординського С., 1',
+      legalAddress: '76018, Івано-Франківська обл., м. Івано-Франківськ, вул. Гординського С., буд. 1, кв. 7',
+      bank: 'АТ КБ «ПРИВАТБАНК»',
+      iban: 'UA423052990000026007001040311',
+      sodNumber: '94/2026',
+      sodIssued: '05.06.2026',
+      sodValidUntil: '04.06.2029',
       phone: '+38 (050) 433-10-54',
       phoneRaw: '+380504331054',
       email: 'konsaltk7@gmail.com',

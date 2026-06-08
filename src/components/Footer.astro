@@ -1,34 +1,98 @@
 ---
 import { activeCompany } from '../config/companies';
+import { Mail, Phone, MapPin } from '@lucide/astro';
 
 const currentYear = new Date().getFullYear();
 const copyrightStartYear = activeCompany.founded || currentYear;
 const copyrightRange = copyrightStartYear === currentYear 
   ? `${currentYear}` 
   : `${copyrightStartYear}-${currentYear}`;
+
+const phoneClean = activeCompany.phone.replace(/[\s()-]/g, '');
+const formattedIban = activeCompany.iban.match(/.{1,4}/g)?.join(' ') || activeCompany.iban;
 ---
 
-<footer class="bg-gray-900 text-gray-300 py-8">
+<footer class="bg-neutral-900 text-neutral-300 pt-10 pb-6">
   <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="flex flex-col md:flex-row items-center justify-between gap-4 text-sm">
-      
-      <div class="flex items-center gap-3">
+
+    <!-- Верхня частина: 2 колонки -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+
+      <!-- Лівa колонка: лого + контакти -->
+      <div>
         <img 
           src={activeCompany.logo} 
           alt={activeCompany.name}
-          class="h-8 w-auto"
+          class="h-14 w-auto mb-3 brightness-0 invert opacity-90"
         />
-        <span class="font-semibold text-white">{activeCompany.name}</span>
+        <p 
+          class="text-sm italic mb-5"
+          style={`color: ${activeCompany.colors.primary}`}
+        >
+          {activeCompany.slogan}
+        </p>
+
+        <div class="flex flex-wrap gap-x-6 gap-y-2 text-sm">
+          <a href={`tel:${phoneClean}`} class="flex items-center gap-2 hover:text-white transition-colors">
+            <Phone size={14} strokeWidth={1.75} />
+            {activeCompany.phone}
+          </a>
+          <a href={`mailto:${activeCompany.email}`} class="flex items-center gap-2 hover:text-white transition-colors">
+            <Mail size={14} strokeWidth={1.75} />
+            {activeCompany.email}
+          </a>
+          <span class="flex items-center gap-2">
+            <MapPin size={14} strokeWidth={1.75} />
+            {activeCompany.address}
+          </span>
+        </div>
       </div>
 
-      <div class="text-center text-gray-400">
-        © {copyrightRange} {activeCompany.name}. Усі права захищені.
-      </div>
-
-      <div class="text-gray-400">
-        ЄДРПОУ: <span class="font-mono">{activeCompany.edrpou}</span>
+      <!-- Правa колонка: реквізити в рядок -->
+      <div class="space-y-2 text-sm">
+        <div>
+          <span class="text-neutral-500">Повна назва:</span>{' '}
+          <span class="text-neutral-200">{activeCompany.legalName}</span>
+        </div>
+        <div>
+          <span class="text-neutral-500">ЄДРПОУ:</span>{' '}
+          <span class="text-neutral-200 font-mono">{activeCompany.edrpou}</span>
+          <span class="text-neutral-500 mx-2">·</span>
+          <span class="text-neutral-500">Директор:</span>{' '}
+          <span class="text-neutral-200">{activeCompany.director}</span>
+        </div>
+        <div>
+          <span class="text-neutral-500">Юр. адреса:</span>{' '}
+          <span class="text-neutral-200">{activeCompany.legalAddress}</span>
+        </div>
+        <div>
+          <span class="text-neutral-500">Банк:</span>{' '}
+          <span class="text-neutral-200">{activeCompany.bank}</span>
+        </div>
+        <div>
+          <span class="text-neutral-500">IBAN:</span>{' '}
+          <span class="text-neutral-200 font-mono text-xs">{formattedIban}</span>
+        </div>
+        <div>
+          <span class="text-neutral-500">Свідоцтво СОД:</span>{' '}
+          <span class="text-neutral-200">№ {activeCompany.sodNumber}</span>
+          <span class="text-neutral-500 mx-2">·</span>
+          <span class="text-neutral-500">Дійсне:</span>{' '}
+          <span class="text-neutral-200">{activeCompany.sodIssued} — {activeCompany.sodValidUntil}</span>
+        </div>
       </div>
 
     </div>
+
+    <!-- Нижня смуга з copyright -->
+    <div class="pt-5 border-t border-neutral-800 flex flex-col md:flex-row items-center justify-between gap-2 text-xs text-neutral-500">
+      <div>
+        © {copyrightRange} {activeCompany.name}. Усі права захищені.
+      </div>
+      <div>
+        Графік роботи: {activeCompany.workingHours.weekdays}
+      </div>
+    </div>
+
   </div>
 </footer>
