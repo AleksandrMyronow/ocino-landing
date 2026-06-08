@@ -14,11 +14,15 @@ function replacePlaceholders(text: string): string {
 <section id="faq" class="py-20 lg:py-28 bg-gray-50">
   <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
 
-    <div class="text-center mb-12 animate-on-scroll">
-      <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
+    <div class="text-center mb-12 lg:mb-16 animate-on-scroll">
+      <div 
+        class="section-title-accent mx-auto"
+        style={`background-color: ${activeCompany.colors.primary}`}
+      ></div>
+      <h2 class="section-title">
         Часті запитання
       </h2>
-      <p class="text-lg text-gray-600">
+      <p class="section-subtitle">
         Відповіді на питання, які найчастіше цікавлять наших клієнтів.
       </p>
     </div>

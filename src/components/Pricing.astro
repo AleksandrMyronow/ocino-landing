@@ -49,32 +49,36 @@ const iconMap: Record<string, any> = {
 };
 ---
 
-<section id="pricing" class="py-20 lg:py-28 bg-white">
+<section id="pricing" class="py-20 lg:py-28 xl:py-32 bg-white">
   <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
 
-    <div class="text-center mb-12 animate-on-scroll">
-      <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
+    <div class="text-center mb-12 lg:mb-16 animate-on-scroll">
+      <div 
+        class="section-title-accent mx-auto"
+        style={`background-color: ${activeCompany.colors.primary}`}
+      ></div>
+      <h2 class="section-title">
         Вартість послуг
       </h2>
-      <p class="text-lg text-gray-600">
+      <p class="section-subtitle">
         Прозоро і чесно про ціноутворення наших послуг.
       </p>
     </div>
 
     <div class="mb-12 p-6 lg:p-8 rounded-2xl border-l-4 animate-on-scroll delay-200" style={`background-color: ${activeCompany.colors.primary}0D; border-color: ${activeCompany.colors.primary}`}>
-      <h3 class="text-xl font-bold text-gray-900 mb-4">
+      <h3 class="text-xl lg:text-2xl font-bold text-gray-900 mb-4">
         {pricingIntro.title}
       </h3>
 
       {pricingIntro.paragraphs.map((p) => (
-        <p class="text-gray-700 leading-relaxed mb-4">{p}</p>
+        <p class="text-base lg:text-lg text-gray-700 leading-relaxed mb-4">{p}</p>
       ))}
 
       <div class="space-y-3 mb-4">
         {pricingIntro.examples.map((ex) => (
           <div class="flex items-start gap-3">
-            <span class="mt-1.5 flex-shrink-0 w-2 h-2 rounded-full" style={`background-color: ${activeCompany.colors.primary}`}></span>
-            <div>
+            <span class="mt-2 flex-shrink-0 w-2 h-2 rounded-full" style={`background-color: ${activeCompany.colors.primary}`}></span>
+            <div class="text-base lg:text-lg">
               <span class="font-semibold text-gray-900">{ex.label}</span>
               <span class="text-gray-700"> — {ex.description}</span>
             </div>
@@ -82,44 +86,44 @@ const iconMap: Record<string, any> = {
         ))}
       </div>
 
-      <p class="text-gray-700 leading-relaxed mb-4">
+      <p class="text-base lg:text-lg text-gray-700 leading-relaxed mb-4">
         {pricingIntro.conclusion}
       </p>
 
-      <p class="font-semibold text-gray-900 mb-2">{pricingIntro.noteTitle}</p>
+      <p class="text-base lg:text-lg font-semibold text-gray-900 mb-2">{pricingIntro.noteTitle}</p>
       <ul class="space-y-1 mb-4">
         {pricingIntro.noteItems.map((item) => (
-          <li class="flex items-start gap-2 text-gray-700">
-            <span class="mt-1.5 flex-shrink-0 w-1.5 h-1.5 rounded-full" style={`background-color: ${activeCompany.colors.primary}`}></span>
+          <li class="flex items-start gap-2 text-base lg:text-lg text-gray-700">
+            <span class="mt-2 flex-shrink-0 w-1.5 h-1.5 rounded-full" style={`background-color: ${activeCompany.colors.primary}`}></span>
             <span>{item}</span>
           </li>
         ))}
       </ul>
 
-      <p class="text-gray-700 leading-relaxed italic">
+      <p class="text-base lg:text-lg text-gray-700 leading-relaxed italic">
         {pricingIntro.noteFinal}
       </p>
     </div>
 
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-8 animate-on-scroll delay-300">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-8 animate-on-scroll delay-300">
       {pricingSimpleItems.map((item) => {
         const IconComponent = iconMap[item.icon];
         return (
-          <div class="group p-5 rounded-xl border border-gray-200 bg-white hover:shadow-lg hover:-translate-y-1 transition-all duration-300 relative overflow-hidden">
+          <div class="group p-6 lg:p-7 rounded-xl border border-gray-200 bg-white hover:shadow-lg hover:-translate-y-1 transition-all duration-300 relative overflow-hidden">
             <div 
               class="absolute top-0 left-0 right-0 h-0.5 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"
               style={`background-color: ${activeCompany.colors.primary}`}
             ></div>
-            <div class="w-12 h-12 rounded-lg flex items-center justify-center mb-3 transition-transform duration-300 group-hover:scale-110" style={`background-color: ${activeCompany.colors.primary}15`}>
+            <div class="icon-rotate w-14 h-14 lg:w-16 lg:h-16 rounded-lg flex items-center justify-center mb-4" style={`background-color: ${activeCompany.colors.primary}15`}>
               {IconComponent && (
-                <IconComponent size={24} strokeWidth={1.75} color={activeCompany.colors.primary} />
+                <IconComponent size={32} strokeWidth={1.75} color={activeCompany.colors.primary} />
               )}
             </div>
-            <h3 class="font-semibold text-gray-900 mb-1">{item.title}</h3>
+            <h3 class="text-base lg:text-lg font-semibold text-gray-900 mb-1">{item.title}</h3>
             {item.subtitle && (
-              <p class="text-sm text-gray-500 mb-3">{item.subtitle}</p>
+              <p class="text-sm lg:text-base text-gray-500 mb-3">{item.subtitle}</p>
             )}
-            <p class="text-lg font-bold mt-2" style={`color: ${activeCompany.colors.primary}`}>
+            <p class="text-xl lg:text-2xl font-bold mt-3" style={`color: ${activeCompany.colors.primary}`}>
               {item.price}
             </p>
           </div>
@@ -131,26 +135,26 @@ const iconMap: Record<string, any> = {
       {pricingTieredItems.map((item) => {
         const IconComponent = iconMap[item.icon];
         return (
-          <div class="p-6 rounded-xl border border-gray-200 bg-white hover:shadow-md transition-shadow duration-300">
-            <div class="flex items-start gap-4 mb-4">
-              <div class="flex-shrink-0 w-12 h-12 rounded-lg flex items-center justify-center" style={`background-color: ${activeCompany.colors.primary}15`}>
+          <div class="p-6 lg:p-8 rounded-xl border border-gray-200 bg-white hover:shadow-md transition-shadow duration-300">
+            <div class="flex items-start gap-5 mb-5">
+              <div class="flex-shrink-0 w-14 h-14 lg:w-16 lg:h-16 rounded-lg flex items-center justify-center" style={`background-color: ${activeCompany.colors.primary}15`}>
                 {IconComponent && (
-                  <IconComponent size={24} strokeWidth={1.75} color={activeCompany.colors.primary} />
+                  <IconComponent size={32} strokeWidth={1.75} color={activeCompany.colors.primary} />
                 )}
               </div>
               <div class="flex-1">
-                <h3 class="text-lg font-bold text-gray-900 mb-1">{item.title}</h3>
+                <h3 class="text-lg lg:text-xl font-bold text-gray-900 mb-1">{item.title}</h3>
                 {item.description && (
-                  <p class="text-sm text-gray-600">{item.description}</p>
+                  <p class="text-sm lg:text-base text-gray-600">{item.description}</p>
                 )}
               </div>
             </div>
 
-            <div class="space-y-3 pl-0 sm:pl-16">
+            <div class="space-y-3 pl-0 sm:pl-20">
               {item.tiers.map((tier) => (
                 <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 py-2 border-b border-gray-100 last:border-b-0">
-                  <span class="text-gray-700 flex-1">{tier.label}</span>
-                  <span class="font-bold text-base whitespace-nowrap" style={`color: ${activeCompany.colors.primary}`}>
+                  <span class="text-base lg:text-lg text-gray-700 flex-1">{tier.label}</span>
+                  <span class="text-base lg:text-lg font-bold whitespace-nowrap" style={`color: ${activeCompany.colors.primary}`}>
                     {tier.price}
                   </span>
                 </div>
@@ -161,17 +165,17 @@ const iconMap: Record<string, any> = {
       })}
     </div>
 
-    <div class="p-8 rounded-2xl text-center animate-on-scroll" style={`background-color: ${activeCompany.colors.primary}`}>
-      <h3 class="text-2xl font-bold text-white mb-3">
+    <div class="p-8 lg:p-10 rounded-2xl text-center animate-on-scroll" style={`background-color: ${activeCompany.colors.primary}`}>
+      <h3 class="text-2xl lg:text-3xl font-bold text-white mb-3">
         {pricingCTA.title}
       </h3>
-      <p class="text-white/90 mb-3 max-w-2xl mx-auto leading-relaxed">
+      <p class="text-base lg:text-lg text-white/90 mb-3 max-w-2xl mx-auto leading-relaxed">
         {pricingCTA.description}
       </p>
-      <p class="text-white/80 text-sm mb-6 max-w-2xl mx-auto italic">
+      <p class="text-sm lg:text-base text-white/80 mb-6 max-w-2xl mx-auto italic">
         {pricingCTA.bonusNote}
       </p>
-      <a href={pricingCTA.buttonHref} class="inline-flex items-center px-8 py-3 bg-white rounded-lg font-semibold hover:bg-gray-100 hover:shadow-lg active:scale-95 transition-all duration-200" style={`color: ${activeCompany.colors.primary}`}>{pricingCTA.buttonText} →</a>
+      <a href={pricingCTA.buttonHref} class="btn-glow inline-flex items-center px-8 py-4 lg:px-10 lg:py-5 bg-white rounded-lg font-semibold text-base lg:text-lg hover:bg-gray-100 hover:shadow-2xl active:scale-95 transition-all duration-200" style={`color: ${activeCompany.colors.primary}`}>{pricingCTA.buttonText} →</a>
     </div>
 
   </div>
