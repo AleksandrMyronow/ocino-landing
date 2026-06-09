@@ -2,20 +2,24 @@
 import { activeCompany } from '../config/companies';
 import { faqItems } from '../config/faq';
 
-/** Замінює плейсхолдери [phone], [email], [address] на дані компанії */
+/**
+ * Замінює плейсхолдери [phone], [email], [legalAddress] на дані компанії.
+ * Поле address у тексті FAQ підставляється з legalAddress компанії.
+ */
 function replacePlaceholders(text: string): string {
   return text
     .replaceAll('[phone]', activeCompany.phone)
     .replaceAll('[email]', activeCompany.email)
-    .replaceAll('[address]', activeCompany.address);
+    .replaceAll('[legalAddress]', activeCompany.legalAddress);
 }
 ---
 
-<section id="faq" class="py-20 lg:py-28 bg-gray-50">
+<section id="faq" class="py-20 lg:py-28 xl:py-32 bg-gray-50">
   <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
 
+    <!-- Заголовок секції -->
     <div class="text-center mb-12 lg:mb-16 animate-on-scroll">
-      <div 
+      <div
         class="section-title-accent mx-auto"
         style={`background-color: ${activeCompany.colors.primary}`}
       ></div>
@@ -27,14 +31,15 @@ function replacePlaceholders(text: string): string {
       </p>
     </div>
 
-    <div class="text-center mb-12 animate-on-scroll">
+    <!-- Список акордеонів -->
+    <div class="space-y-3 animate-on-scroll delay-200">
       {faqItems.map((item) => (
         <details class="group border border-gray-200 rounded-xl overflow-hidden bg-white">
-          <summary 
+          <summary
             class="flex items-center justify-between cursor-pointer p-5 font-semibold text-gray-900 hover:bg-gray-50 transition-colors list-none gap-4"
           >
             <span class="flex-1">{item.question}</span>
-            <span 
+            <span
               class="flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center text-white transition-transform group-open:rotate-45"
               style={`background-color: ${activeCompany.colors.primary}`}
             >
@@ -42,33 +47,33 @@ function replacePlaceholders(text: string): string {
             </span>
           </summary>
 
-          <div class="px-5 pb-6 pt-1 space-y-6">
+          <div class="px-5 pb-6 pt-1 space-y-6 text-left">
 
-            {/* Вступний текст */}
+            <!-- Вступний текст -->
             {item.intro && (
               <div class="text-gray-700 leading-relaxed whitespace-pre-line">
                 {replacePlaceholders(item.intro)}
               </div>
             )}
 
-            {/* Секції */}
+            <!-- Секції відповіді -->
             {item.sections.map((section) => (
               <div class="space-y-3">
-                <h3 
-                  class="text-sm font-semibold uppercase tracking-wide" 
+                <h3
+                  class="text-sm font-semibold uppercase tracking-wide"
                   style={`color: ${activeCompany.colors.primary}`}
                 >
                   {section.title}
                 </h3>
 
-                {/* Абзаци секції */}
+                <!-- Абзаци секції -->
                 {section.paragraphs && section.paragraphs.map((p) => (
                   <p class="text-gray-700 leading-relaxed">
                     {replacePlaceholders(p)}
                   </p>
                 ))}
 
-                {/* Списки секції */}
+                <!-- Списки секції -->
                 {section.lists && section.lists.map((list) => (
                   <div class="space-y-2">
                     {list.label && (
@@ -79,7 +84,7 @@ function replacePlaceholders(text: string): string {
                     <ul class="space-y-2">
                       {list.items.map((listItem) => (
                         <li class="flex items-start gap-2.5 text-gray-700">
-                          <span 
+                          <span
                             class="mt-1.5 flex-shrink-0 w-1.5 h-1.5 rounded-full"
                             style={`background-color: ${activeCompany.colors.primary}`}
                           ></span>

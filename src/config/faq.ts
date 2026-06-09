@@ -8,7 +8,7 @@
  * У текстах підставляються плейсхолдери:
  * [phone] → activeCompany.phone
  * [email] → activeCompany.email
- * [address] → activeCompany.address
+ * [address] → activeCompany.legalAddress
  */
 
 export interface FAQSection {
@@ -163,7 +163,7 @@ export interface FAQSection {
           lists: [
             {
               items: [
-                'Особисто — за адресою [address] за попередньою домовленістю про час візиту',
+                'Особисто — за адресою [legalAddress] за попередньою домовленістю про час візиту',
                 'Електронною поштою — на офіційну адресу [email], у форматі PDF або сканованих копій',
                 'Через месенджери — Viber, Telegram, WhatsApp на офіційний номер [phone]',
                 'Через хмарні сервіси — ми використовуємо корпоративні Google Drive та OneDrive, також приймаємо документи з інших файлообмінників (Dropbox, MEGA, WeTransfer тощо). Достатньо надіслати посилання на папку зі сканами / фото документів',

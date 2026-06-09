@@ -16,6 +16,7 @@ export interface Company {
     email: string;
     director: string;
     logo: string;
+    logoFooter: string;
     founded: string;
     yearsOnMarket: number;
     about: string;
@@ -56,6 +57,7 @@ export const companies: Record<string, Company> = {
       email: 'info@gvctrend.com',
       director: 'Миронов Володимир Миколайович',
       logo: '/logos/gvctrend.svg',
+      logoFooter: '/logos/gvctrend_blue.svg',
       founded: '2025',
       yearsOnMarket: 1,
       about: "Оціночна компанія «ГВК Тренд» надає професійні послуги з незалежної оцінки майна на території всієї України. Наша команда — це кваліфіковані оцінювачі, заслужені оцінювачі УТО та власники міжнародних сертифікатів Tegova і WAWO, що мають свідоцтва за всіма напрямками оцінки. Ми гарантуємо об'єктивність, точність та відповідність звітів вимогам законодавства.",
@@ -72,7 +74,7 @@ export const companies: Record<string, Company> = {
         weekends: 'Сб-Нд: за домовленістю',
       },
       colors: {
-        primary: '#0F4C81',
+        primary: '#1E4FA3',
         primaryDark: '#093560',
         accent: '#F5A623',
       },
@@ -96,6 +98,7 @@ export const companies: Record<string, Company> = {
       email: 'info@apeks-ok.com',
       director: 'Братішко Ігор Григорович',
       logo: '/logos/apeks.svg',
+      logoFooter: '/logos/apeks.svg',
       founded: '2008',
       yearsOnMarket: 17,
       about: "Оціночна компанія «Апекс» працює на ринку з 2008 року. За цей час ми накопичили багатий досвід оцінки майна найрізноманітніших типів — від окремих предметів до цілісних майнових комплексів. У складі компанії працюють заслужені оцінювачі Українського товариства оцінювачів (УТО), що володіють усіма необхідними кваліфікаціями та постійно підвищують професійний рівень.",
@@ -136,6 +139,7 @@ export const companies: Record<string, Company> = {
       email: 'konsaltk7@gmail.com',
       director: 'Балагурак Володимир Володимирович',
       logo: '/logos/k7.svg',
+      logoFooter: '/logos/k7.svg',
       founded: '2025',
       yearsOnMarket: 1,
       about: "ТОВ «Консалтингова компанія К7» надає професійні послуги з незалежної оцінки майна на території всієї України. Наша команда — це кваліфіковані оцінювачі, заслужені оцінювачі УТО та власники міжнародних сертифікатів Tegova і WAWO, що мають свідоцтва за всіма напрямками оцінки. Ми гарантуємо об'єктивність, точність та відповідність звітів вимогам законодавства.",
@@ -163,4 +167,4 @@ export const companies: Record<string, Company> = {
    * АКТИВНА КОМПАНІЯ — це "тумблер" сайту.
    * Поміняй на companies.apex або companies.k7 щоб згенерувати сайт для іншої компанії.
    */
-  export const activeCompany: Company = companies.apex;
+  export const activeCompany: Company = companies.gvctrend;

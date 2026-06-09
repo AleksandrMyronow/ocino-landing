@@ -4,30 +4,33 @@ import { Mail, Phone, MapPin } from '@lucide/astro';
 
 const currentYear = new Date().getFullYear();
 const copyrightStartYear = activeCompany.founded || currentYear;
-const copyrightRange = copyrightStartYear === currentYear 
-  ? `${currentYear}` 
+const copyrightRange = copyrightStartYear === currentYear
+  ? `${currentYear}`
   : `${copyrightStartYear}-${currentYear}`;
 
 const phoneClean = activeCompany.phone.replace(/[\s()-]/g, '');
 const formattedIban = activeCompany.iban.match(/.{1,4}/g)?.join(' ') || activeCompany.iban;
+
+// Колір слогана (HEX буква E з логотипу). Постав потрібний:
+const sloganColor = '#79C0F2';
 ---
 
-<footer class="bg-neutral-900 text-neutral-300 pt-10 pb-6">
+<footer class="text-white pt-10 pb-6" style={`background-color: ${activeCompany.colors.primary}`}>
   <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
 
     <!-- Верхня частина: 2 колонки -->
     <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
 
-      <!-- Лівa колонка: лого + контакти -->
+      <!-- Ліва колонка: лого + контакти -->
       <div>
-        <img 
-          src={activeCompany.logo} 
+        <img
+          src={activeCompany.logoFooter}
           alt={activeCompany.name}
-          class="h-14 w-auto mb-3 brightness-0 invert opacity-90"
+          class="h-14 w-auto mb-3"
         />
-        <p 
+        <p
           class="text-sm italic mb-5"
-          style={`color: ${activeCompany.colors.primary}`}
+          style={`color: ${sloganColor}`}
         >
           {activeCompany.slogan}
         </p>
@@ -48,44 +51,44 @@ const formattedIban = activeCompany.iban.match(/.{1,4}/g)?.join(' ') || activeCo
         </div>
       </div>
 
-      <!-- Правa колонка: реквізити в рядок -->
+      <!-- Права колонка: реквізити -->
       <div class="space-y-2 text-sm">
         <div>
-          <span class="text-neutral-500">Повна назва:</span>{' '}
-          <span class="text-neutral-200">{activeCompany.legalName}</span>
+          <span class="text-white/70">Повна назва:</span>{' '}
+          <span class="text-white">{activeCompany.legalName}</span>
         </div>
         <div>
-          <span class="text-neutral-500">ЄДРПОУ:</span>{' '}
-          <span class="text-neutral-200 font-mono">{activeCompany.edrpou}</span>
-          <span class="text-neutral-500 mx-2">·</span>
-          <span class="text-neutral-500">Директор:</span>{' '}
-          <span class="text-neutral-200">{activeCompany.director}</span>
+          <span class="text-white/70">ЄДРПОУ:</span>{' '}
+          <span class="text-white font-mono">{activeCompany.edrpou}</span>
+          <span class="text-white/70 mx-2">·</span>
+          <span class="text-white/70">Директор:</span>{' '}
+          <span class="text-white">{activeCompany.director}</span>
         </div>
         <div>
-          <span class="text-neutral-500">Юр. адреса:</span>{' '}
-          <span class="text-neutral-200">{activeCompany.legalAddress}</span>
+          <span class="text-white/70">Юр. адреса:</span>{' '}
+          <span class="text-white">{activeCompany.legalAddress}</span>
         </div>
         <div>
-          <span class="text-neutral-500">Банк:</span>{' '}
-          <span class="text-neutral-200">{activeCompany.bank}</span>
+          <span class="text-white/70">Банк:</span>{' '}
+          <span class="text-white">{activeCompany.bank}</span>
         </div>
         <div>
-          <span class="text-neutral-500">IBAN:</span>{' '}
-          <span class="text-neutral-200 font-mono text-xs">{formattedIban}</span>
+          <span class="text-white/70">IBAN:</span>{' '}
+          <span class="text-white font-mono text-xs">{formattedIban}</span>
         </div>
         <div>
-          <span class="text-neutral-500">Свідоцтво СОД:</span>{' '}
-          <span class="text-neutral-200">№ {activeCompany.sodNumber}</span>
-          <span class="text-neutral-500 mx-2">·</span>
-          <span class="text-neutral-500">Дійсне:</span>{' '}
-          <span class="text-neutral-200">{activeCompany.sodIssued} — {activeCompany.sodValidUntil}</span>
+          <span class="text-white/70">Свідоцтво СОД:</span>{' '}
+          <span class="text-white">№ {activeCompany.sodNumber}</span>
+          <span class="text-white/70 mx-2">·</span>
+          <span class="text-white/70">Дійсне:</span>{' '}
+          <span class="text-white">{activeCompany.sodIssued} — {activeCompany.sodValidUntil}</span>
         </div>
       </div>
 
     </div>
 
     <!-- Нижня смуга з copyright -->
-    <div class="pt-5 border-t border-neutral-800 flex flex-col md:flex-row items-center justify-between gap-2 text-xs text-neutral-500">
+    <div class="pt-5 border-t border-white/20 flex flex-col md:flex-row items-center justify-between gap-2 text-xs text-white/70">
       <div>
         © {copyrightRange} {activeCompany.name}. Усі права захищені.
       </div>
