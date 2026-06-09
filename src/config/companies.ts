@@ -81,7 +81,7 @@ export const companies: Record<string, Company> = {
       mapEmbed: '',
     },
   
-    apex: {
+    apeks: {
       id: 'apex',
       name: 'ПП ОК АПЕКС',
       slogan: 'висновки яким довіряють',
@@ -167,4 +167,4 @@ export const companies: Record<string, Company> = {
    * АКТИВНА КОМПАНІЯ — це "тумблер" сайту.
    * Поміняй на companies.apex або companies.k7 щоб згенерувати сайт для іншої компанії.
    */
-  export const activeCompany: Company = companies.gvctrend;
+  export const activeCompany: Company = companies.apeks;
